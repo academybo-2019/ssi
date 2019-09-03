@@ -41,9 +41,7 @@ class ItemDetail extends Component {
     render() {
         return (
             <>
-            
                 {this.renderItem(this.props.selectedItem?this.props.selectedItem:null)}
-
             <div className="col-12 col-md-5 m-1">
                 {this.renderComments(this.props.selectedItem?this.props.selectedItem.comments:null)}
             </div>

@@ -4,25 +4,22 @@ import './App.css';
 import {Navbar, NavbarBrand} from 'reactstrap';
 import CatalogComponent from './components/CatalogComponent';
 import {ITEMS} from './shared/items';
+import Main from './components/Main';
+import {BrowserRouter} from 'react-router-dom';
 
 class App extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state={
-        items: ITEMS
-    }
+    
 }
 
   render(){
     return (
       <div className="App">
-            <Navbar dark color="primary">
-              <div className="container">
-                <NavbarBrand href="/">Sistema de Seguridad Industrial</NavbarBrand>
-              </div>
-            </Navbar>
-            <CatalogComponent items={this.state.items}></CatalogComponent>
+        <BrowserRouter>
+            <Main></Main>
+        </BrowserRouter>
           </div>
   
     );
