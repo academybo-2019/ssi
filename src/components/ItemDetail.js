@@ -1,51 +1,65 @@
 import React, { Component } from 'react';
-import {Media, Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText} from 'reactstrap';
+import {Card, CardImg, CardTitle, CardImgOverlay, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
+
 class ItemDetail extends Component {
 
-    renderItem(item) {
-        if (item != null) {
-            return (
-                <Card className="col-5">
-                    <CardImg width="100%" src={item.image} alt={item.name}/>
-                    <CardBody>
-                        <CardTitle>{item.name}</CardTitle>
-                        <CardText>{item.description}</CardText>
-                    </CardBody>
-                </Card>
-            );
-    
-        } else {
-            return (
-                <div/>
-            );
-        }
-    
+    constructor(props, context){
+        super(props, context)    
     }
 
-    renderComments(comments){
-        if(comments != null) {
-            const listComments = comments.map((c,index)=>{
-                return (
-                    <li key={index}>{c.comment} - {c.author}</li>
+    renderItem(item) {
+        
+        if(item != null){
+            console.log(item.comments);
+            return(
+                    <Card>
+                        <CardImg width="100%" src={item.image} alt={item.name}/>
+                        <CardImgOverlay>
+                            <CardTitle>{item.name}</CardTitle>
+                        </CardImgOverlay>
+                    </Card>
+            );
+        }else{
+            return(<div></div>);
+        }
+    }
+
+    renderComments(comments) {
+        
+        if(comments != null){
+            const resume = comments.map((c,index)=>{
+                return(
+                    <li key={index}>
+                        {c.comment}-{c.author}
+                    </li>
                 );
             });
-            return (
+            return(
                 <ul>
-                    {listComments}
+                    {resume}
                 </ul>
             );
         }else{
-            return <div></div>
-;        }
+            return(<div></div>);
+        }
     }
+
     render() {
         return (
-            <>
-                {this.renderItem(this.props.selectedItem?this.props.selectedItem:null)}
-            <div className="col-12 col-md-5 m-1">
-                {this.renderComments(this.props.selectedItem?this.props.selectedItem.comments:null)}
+            <div className="container">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/catalog">Catalog</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{this.props.item.name}</BreadcrumbItem>
+                </Breadcrumb>
+
+                <div className="col-12 col-md-5">
+                    {this.renderItem(this.props.item?this.props.item:null)}
+                </div>
+                <div className="col-12 col-md-5 ">
+                    {this.renderComments(this.props.comments?this.props.comments:null)}
+                </div>
             </div>
-            </>
         );
     }
 }
