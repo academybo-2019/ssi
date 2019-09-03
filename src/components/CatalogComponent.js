@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Media, Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText} from 'reactstrap';
+import ItemDetail from './ItemDetail';
 class CatalogComponent extends Component {
 
     constructor(props, context) {
@@ -15,25 +16,7 @@ class CatalogComponent extends Component {
         })
     }
 
-    renderItem(item) {
-        if (item != null) {
-            return (
-                <Card className="col-5">
-                    <CardImg width="100%" src={item.image} alt={item.name}/>
-                    <CardBody>
-                        <CardTitle>{item.name}</CardTitle>
-                        <CardText>{item.description}</CardText>
-                    </CardBody>
-                </Card>
-            );
     
-        } else {
-            return (
-                <div/>
-            );
-        }
-    
-    }
     
 
     render() {
@@ -43,9 +26,9 @@ class CatalogComponent extends Component {
         };
 
         
-        var catalog= this.props.items.map(item => {
+        var catalog= this.props.items.map((item,index )=> {
             return (
-                <div key={item.id} className="col-12 col-md-5 m-1">
+                <div key={index} className="col-12 col-md-5 m-1">
             <Card onClick={()=>{this.onItemSelect(item)}}>
                     <CardImg width="100%" src={item.image} alt={item.name}/>
                 <CardImgOverlay>
@@ -61,12 +44,10 @@ class CatalogComponent extends Component {
         return (
               <div className="container">
                 <div className="row">
-                    
                         {catalog}
-                    
                 </div>
                 <div className="row">
-                {this.renderItem(this.state.selectedItem)}
+                    <ItemDetail selectedItem={this.state.selectedItem}></ItemDetail>
                 </div>
             </div>
 
