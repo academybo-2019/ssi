@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FormularioComponent from './FormularioComponent';
+
 function ContactComponent(props) {
     return(
         <div className="container">
@@ -27,6 +29,9 @@ function ContactComponent(props) {
                         <a role="button" className="btn btn-success" href="mailto:ssi@security.net"><i className="fa fa-envelope-o"></i> Email</a>
                     </div>
                 </div>
+            </div>
+            <div className="row">
+                <FormularioComponent></FormularioComponent>
             </div>
         </div>
     );
